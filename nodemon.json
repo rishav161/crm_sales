@@ -1,0 +1,3 @@
+{
+  "ignore": ["src/utils/testRunner.js", "check_atlas.js", "check_db.js"]
+}
