@@ -26,36 +26,36 @@ const seedData = async () => {
 
     // 1. Create Users
     const admin = await User.create({
-      name: 'System Admin',
-      email: 'admin@crm.com',
+      name: 'Rishav Admin',
+      email: 'rishavadmin@gmail.com',
       phone: '+1-555-0100',
-      password: 'Password123!',
+      password: 'Password@123',
       role: 'Admin',
       isActive: true,
     });
 
     const manager = await User.create({
-      name: 'Sarah Manager',
-      email: 'manager@crm.com',
+      name: 'Rishav Manager',
+      email: 'rishavmanager@gmail.com',
       phone: '+1-555-0200',
-      password: 'Password123!',
+      password: 'Password@123',
       role: 'Sales Manager',
       isActive: true,
     });
 
     const executive = await User.create({
-      name: 'Alex Executive',
-      email: 'alex@crm.com',
+      name: 'Rishav Executive',
+      email: 'rishavexecutive@gmail.com',
       phone: '+1-555-0300',
-      password: 'Password123!',
+      password: 'Password@123',
       role: 'Sales Executive',
       isActive: true,
     });
 
     console.log('[Seed]: Users created:');
-    console.log('   - Admin: admin@crm.com (Password123!)');
-    console.log('   - Manager: manager@crm.com (Password123!)');
-    console.log('   - Executive: alex@crm.com (Password123!)');
+    console.log('   - Admin: rishavadmin@gmail.com (Password@123)');
+    console.log('   - Manager: rishavmanager@gmail.com (Password@123)');
+    console.log('   - Executive: rishavexecutive@gmail.com (Password@123)');
 
     // 2. Create Sample Leads
     const lead1 = await Lead.create({

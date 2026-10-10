@@ -95,9 +95,9 @@ npm run seed
 ```
 
 **Seed Credentials**:
-- **Admin**: `admin@crm.com` / `Password123!`
-- **Sales Manager**: `manager@crm.com` / `Password123!`
-- **Sales Executive**: `alex@crm.com` / `Password123!`
+- **Admin**: `rishavadmin@gmail.com` / `Password@123`
+- **Sales Manager**: `rishavmanager@gmail.com` / `Password@123`
+- **Sales Executive**: `rishavexecutive@gmail.com` / `Password@123`
 
 ### 5. Run Server
 

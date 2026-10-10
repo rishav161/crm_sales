@@ -70,8 +70,8 @@ const runTests = async () => {
     // ----------------------------------------------------
     // TC-AUTH-02: Login as Admin
     const adminLogin = await request('POST', '/auth/login', {
-      email: 'admin@crm.com',
-      password: 'Password123!',
+      email: 'rishavadmin@gmail.com',
+      password: 'Password@123',
     });
     if (adminLogin.status === 200 && adminLogin.body.data.token) {
       adminToken = adminLogin.body.data.token;
@@ -82,15 +82,15 @@ const runTests = async () => {
 
     // Login as Executive
     const execLogin = await request('POST', '/auth/login', {
-      email: 'alex@crm.com',
-      password: 'Password123!',
+      email: 'rishavexecutive@gmail.com',
+      password: 'Password@123',
     });
     if (execLogin.status === 200) execToken = execLogin.body.data.token;
 
     // Login as Manager
     const managerLogin = await request('POST', '/auth/login', {
-      email: 'manager@crm.com',
-      password: 'Password123!',
+      email: 'rishavmanager@gmail.com',
+      password: 'Password@123',
     });
     if (managerLogin.status === 200) managerToken = managerLogin.body.data.token;
 
@@ -99,21 +99,21 @@ const runTests = async () => {
     const regRes = await request('POST', '/auth/register', {
       name: 'Test Exec',
       email: regEmail,
-      password: 'Password123!',
+      password: 'Password@123',
       role: 'Sales Executive',
     });
     logResult('TC-AUTH-01', 'Register User', regRes.status === 201, `Status ${regRes.status}, User ID: ${regRes.body.data?.user?._id}`);
 
     // TC-AUTH-03: Login with Invalid Password
     const badLogin = await request('POST', '/auth/login', {
-      email: 'admin@crm.com',
+      email: 'rishavadmin@gmail.com',
       password: 'WrongPassword!',
     });
     logResult('TC-AUTH-03', 'Invalid Password Rejection', badLogin.status === 401, `Returned status ${badLogin.status}`);
 
     // TC-AUTH-04: Fetch Profile /me
     const meRes = await request('GET', '/auth/me', null, adminToken);
-    logResult('TC-AUTH-04', 'Get Profile (/me)', meRes.status === 200 && meRes.body.data.user.email === 'admin@crm.com', `Fetched user: ${meRes.body.data?.user?.name}`);
+    logResult('TC-AUTH-04', 'Get Profile (/me)', meRes.status === 200 && meRes.body.data.user.email === 'rishavadmin@gmail.com', `Fetched user: ${meRes.body.data?.user?.name}`);
 
     // TC-AUTH-05: Protected route without token
     const noTokenRes = await request('GET', '/auth/me');
