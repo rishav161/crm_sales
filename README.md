@@ -94,10 +94,6 @@ Populate the database with pre-configured Admin, Sales Manager, and Sales Execut
 npm run seed
 ```
 
-**Seed Credentials**:
-- **Admin**: `rishavadmin@gmail.com` / `Password@123`
-- **Sales Manager**: `rishavmanager@gmail.com` / `Password@123`
-- **Sales Executive**: `rishavexecutive@gmail.com` / `Password@123`
 
 ### 5. Run Server
 
@@ -176,6 +172,29 @@ Interactive Swagger documentation is served live at:
 - `GET /stats` - Key CRM conversion statistics, revenue totals, & activity counts (`Protected`).
 - `GET /pipeline` - Deal count & value breakdown across sales pipeline stages (`Protected`).
 - `GET /team-performance` - Sales team conversion & revenue metrics (`Admin`, `Sales Manager`).
+
+---
+
+## 📋 Important Business Rules
+
+1. **Atomic Lead Conversion**:
+   - Qualified leads are converted into a **Customer** and **Deal** in an atomic transaction (`mongoose.startSession()`), ensuring that partial conversion never leaves inconsistent data.
+   - Once converted, a lead cannot be converted again.
+
+2. **Deal Stage Transition Rules**:
+   - Closed deals in stage **`Won`** or **`Lost`** cannot freely be moved back to active stages by non-admin users.
+   - Marking a deal as **`Lost`** strictly requires providing a valid `lostReason`.
+   - Marking a deal as **`Won`** automatically updates probability to `100%`.
+   - Deal monetary value must be greater than zero.
+   - Probability must be between `0` and `100%`.
+   - **Expected Revenue** is dynamically computed on save: $Expected Revenue = (Value \times Probability) / 100$.
+
+3. **Activities & Overdue Automation**:
+   - Activity status automatically transitions from `Pending` to `Overdue` whenever `dueDate < Date.now()`.
+   - Marking an activity completed records the exact `completedDate` timestamp and logs a timeline audit event.
+
+4. **Timeline Audit Log System**:
+   - Centralized audit events are logged for key events across entity lifecycles (`Lead Created`, `Lead Assigned`, `Lead Reassigned`, `Lead Status Changed`, `Lead Converted`, `Customer Created`, `Deal Created`, `Deal Stage Changed`, `Deal Won`, `Deal Lost`, `Follow-up Created`, `Follow-up Completed`).
 
 ---
 
